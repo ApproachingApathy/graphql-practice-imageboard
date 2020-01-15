@@ -19,7 +19,8 @@ export default class CreateAlbumModal extends React.Component {
                         <input className='modal-input' type="text" name="album-name" id="album-name" placeholder="Album Name" />
                         <textarea className='modal-input modal-textarea' name="album-desc" id="" cols="30" rows="5" placeholder='Album Description'></textarea>
                         <div className="modal-buttons">
-                            <button className='modal-dialog-button'>Create Album</button>
+                            <button className='modal-dialog-button modal-dialog-button-reject'>Cancel</button>
+                            <button className='modal-dialog-button modal-dialog-button-accept'>Create Album</button>
                         </div>
                     </form>
                 </div>
