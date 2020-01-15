@@ -1,0 +1,9 @@
+.gallery {
+    display: flex;
+    align-items: normal;
+    margin: 15px;
+    overflow: scroll;
+    flex-direction: row;
+    padding: 5px 10px;
+    height: 310px;
+}

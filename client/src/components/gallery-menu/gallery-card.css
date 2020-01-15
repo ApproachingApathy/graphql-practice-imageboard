@@ -1,0 +1,39 @@
+.gallery-icon {
+    margin: 0 10px;
+    flex-basis: 200px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: 100%;
+    color: aliceblue;
+}
+
+
+.gallery-icon-preview {
+    opacity: 0;
+    height: 100%;
+    background-color: rgb(36, 36, 36);
+    padding:10px;
+    text-align: center;
+}
+
+.gallery-icon-preview:hover {
+    opacity: 1;
+    background-color: rgb(36, 36, 36);
+}
+
+.icon-bg {
+    opacity: .7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height:100%;
+}
+
+.gallery-icon-preview>*:hover {
+    opacity: 1;
+}
+
+.gallery-title {
+    margin-left: 20px;
+}
