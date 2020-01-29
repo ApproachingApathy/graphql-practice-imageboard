@@ -3,17 +3,529 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateUser {
+/* GraphQL */ `type AggregateAlbum {
   count: Int!
+}
+
+type AggregateImage {
+  count: Int!
+}
+
+type AggregateUser {
+  count: Int!
+}
+
+type Album {
+  id: ID!
+  title: String!
+  meta: Json!
+  owner: User!
+  images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image!]
+}
+
+type AlbumConnection {
+  pageInfo: PageInfo!
+  edges: [AlbumEdge]!
+  aggregate: AggregateAlbum!
+}
+
+input AlbumCreateInput {
+  id: ID
+  title: String!
+  meta: Json!
+  owner: UserCreateOneWithoutAlbumsInput!
+  images: ImageCreateManyWithoutAlbumInput
+}
+
+input AlbumCreateManyWithoutOwnerInput {
+  create: [AlbumCreateWithoutOwnerInput!]
+  connect: [AlbumWhereUniqueInput!]
+}
+
+input AlbumCreateOneWithoutImagesInput {
+  create: AlbumCreateWithoutImagesInput
+  connect: AlbumWhereUniqueInput
+}
+
+input AlbumCreateWithoutImagesInput {
+  id: ID
+  title: String!
+  meta: Json!
+  owner: UserCreateOneWithoutAlbumsInput!
+}
+
+input AlbumCreateWithoutOwnerInput {
+  id: ID
+  title: String!
+  meta: Json!
+  images: ImageCreateManyWithoutAlbumInput
+}
+
+type AlbumEdge {
+  node: Album!
+  cursor: String!
+}
+
+enum AlbumOrderByInput {
+  id_ASC
+  id_DESC
+  title_ASC
+  title_DESC
+  meta_ASC
+  meta_DESC
+}
+
+type AlbumPreviousValues {
+  id: ID!
+  title: String!
+  meta: Json!
+}
+
+input AlbumScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  AND: [AlbumScalarWhereInput!]
+  OR: [AlbumScalarWhereInput!]
+  NOT: [AlbumScalarWhereInput!]
+}
+
+type AlbumSubscriptionPayload {
+  mutation: MutationType!
+  node: Album
+  updatedFields: [String!]
+  previousValues: AlbumPreviousValues
+}
+
+input AlbumSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: AlbumWhereInput
+  AND: [AlbumSubscriptionWhereInput!]
+}
+
+input AlbumUpdateInput {
+  title: String
+  meta: Json
+  owner: UserUpdateOneRequiredWithoutAlbumsInput
+  images: ImageUpdateManyWithoutAlbumInput
+}
+
+input AlbumUpdateManyDataInput {
+  title: String
+  meta: Json
+}
+
+input AlbumUpdateManyMutationInput {
+  title: String
+  meta: Json
+}
+
+input AlbumUpdateManyWithoutOwnerInput {
+  create: [AlbumCreateWithoutOwnerInput!]
+  delete: [AlbumWhereUniqueInput!]
+  connect: [AlbumWhereUniqueInput!]
+  set: [AlbumWhereUniqueInput!]
+  disconnect: [AlbumWhereUniqueInput!]
+  update: [AlbumUpdateWithWhereUniqueWithoutOwnerInput!]
+  upsert: [AlbumUpsertWithWhereUniqueWithoutOwnerInput!]
+  deleteMany: [AlbumScalarWhereInput!]
+  updateMany: [AlbumUpdateManyWithWhereNestedInput!]
+}
+
+input AlbumUpdateManyWithWhereNestedInput {
+  where: AlbumScalarWhereInput!
+  data: AlbumUpdateManyDataInput!
+}
+
+input AlbumUpdateOneRequiredWithoutImagesInput {
+  create: AlbumCreateWithoutImagesInput
+  update: AlbumUpdateWithoutImagesDataInput
+  upsert: AlbumUpsertWithoutImagesInput
+  connect: AlbumWhereUniqueInput
+}
+
+input AlbumUpdateWithoutImagesDataInput {
+  title: String
+  meta: Json
+  owner: UserUpdateOneRequiredWithoutAlbumsInput
+}
+
+input AlbumUpdateWithoutOwnerDataInput {
+  title: String
+  meta: Json
+  images: ImageUpdateManyWithoutAlbumInput
+}
+
+input AlbumUpdateWithWhereUniqueWithoutOwnerInput {
+  where: AlbumWhereUniqueInput!
+  data: AlbumUpdateWithoutOwnerDataInput!
+}
+
+input AlbumUpsertWithoutImagesInput {
+  update: AlbumUpdateWithoutImagesDataInput!
+  create: AlbumCreateWithoutImagesInput!
+}
+
+input AlbumUpsertWithWhereUniqueWithoutOwnerInput {
+  where: AlbumWhereUniqueInput!
+  update: AlbumUpdateWithoutOwnerDataInput!
+  create: AlbumCreateWithoutOwnerInput!
+}
+
+input AlbumWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  owner: UserWhereInput
+  images_some: ImageWhereInput
+  AND: [AlbumWhereInput!]
+}
+
+input AlbumWhereUniqueInput {
+  id: ID
 }
 
 type BatchPayload {
   count: Long!
 }
 
+scalar DateTime
+
+type Image {
+  id: ID!
+  title: String!
+  album: Album!
+  meta: Json!
+  filePath: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type ImageConnection {
+  pageInfo: PageInfo!
+  edges: [ImageEdge]!
+  aggregate: AggregateImage!
+}
+
+input ImageCreateInput {
+  id: ID
+  title: String!
+  album: AlbumCreateOneWithoutImagesInput!
+  meta: Json!
+  filePath: String!
+}
+
+input ImageCreateManyWithoutAlbumInput {
+  create: [ImageCreateWithoutAlbumInput!]
+  connect: [ImageWhereUniqueInput!]
+}
+
+input ImageCreateWithoutAlbumInput {
+  id: ID
+  title: String!
+  meta: Json!
+  filePath: String!
+}
+
+type ImageEdge {
+  node: Image!
+  cursor: String!
+}
+
+enum ImageOrderByInput {
+  id_ASC
+  id_DESC
+  title_ASC
+  title_DESC
+  meta_ASC
+  meta_DESC
+  filePath_ASC
+  filePath_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type ImagePreviousValues {
+  id: ID!
+  title: String!
+  meta: Json!
+  filePath: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input ImageScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  filePath: String
+  filePath_not: String
+  filePath_in: [String!]
+  filePath_not_in: [String!]
+  filePath_lt: String
+  filePath_lte: String
+  filePath_gt: String
+  filePath_gte: String
+  filePath_contains: String
+  filePath_not_contains: String
+  filePath_starts_with: String
+  filePath_not_starts_with: String
+  filePath_ends_with: String
+  filePath_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [ImageScalarWhereInput!]
+  OR: [ImageScalarWhereInput!]
+  NOT: [ImageScalarWhereInput!]
+}
+
+type ImageSubscriptionPayload {
+  mutation: MutationType!
+  node: Image
+  updatedFields: [String!]
+  previousValues: ImagePreviousValues
+}
+
+input ImageSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ImageWhereInput
+  AND: [ImageSubscriptionWhereInput!]
+}
+
+input ImageUpdateInput {
+  title: String
+  album: AlbumUpdateOneRequiredWithoutImagesInput
+  meta: Json
+  filePath: String
+}
+
+input ImageUpdateManyDataInput {
+  title: String
+  meta: Json
+  filePath: String
+}
+
+input ImageUpdateManyMutationInput {
+  title: String
+  meta: Json
+  filePath: String
+}
+
+input ImageUpdateManyWithoutAlbumInput {
+  create: [ImageCreateWithoutAlbumInput!]
+  delete: [ImageWhereUniqueInput!]
+  connect: [ImageWhereUniqueInput!]
+  set: [ImageWhereUniqueInput!]
+  disconnect: [ImageWhereUniqueInput!]
+  update: [ImageUpdateWithWhereUniqueWithoutAlbumInput!]
+  upsert: [ImageUpsertWithWhereUniqueWithoutAlbumInput!]
+  deleteMany: [ImageScalarWhereInput!]
+  updateMany: [ImageUpdateManyWithWhereNestedInput!]
+}
+
+input ImageUpdateManyWithWhereNestedInput {
+  where: ImageScalarWhereInput!
+  data: ImageUpdateManyDataInput!
+}
+
+input ImageUpdateWithoutAlbumDataInput {
+  title: String
+  meta: Json
+  filePath: String
+}
+
+input ImageUpdateWithWhereUniqueWithoutAlbumInput {
+  where: ImageWhereUniqueInput!
+  data: ImageUpdateWithoutAlbumDataInput!
+}
+
+input ImageUpsertWithWhereUniqueWithoutAlbumInput {
+  where: ImageWhereUniqueInput!
+  update: ImageUpdateWithoutAlbumDataInput!
+  create: ImageCreateWithoutAlbumInput!
+}
+
+input ImageWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  album: AlbumWhereInput
+  filePath: String
+  filePath_not: String
+  filePath_in: [String!]
+  filePath_not_in: [String!]
+  filePath_lt: String
+  filePath_lte: String
+  filePath_gt: String
+  filePath_gte: String
+  filePath_contains: String
+  filePath_not_contains: String
+  filePath_starts_with: String
+  filePath_not_starts_with: String
+  filePath_ends_with: String
+  filePath_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [ImageWhereInput!]
+}
+
+input ImageWhereUniqueInput {
+  id: ID
+}
+
+scalar Json
+
 scalar Long
 
 type Mutation {
+  createAlbum(data: AlbumCreateInput!): Album!
+  updateAlbum(data: AlbumUpdateInput!, where: AlbumWhereUniqueInput!): Album
+  updateManyAlbums(data: AlbumUpdateManyMutationInput!, where: AlbumWhereInput): BatchPayload!
+  upsertAlbum(where: AlbumWhereUniqueInput!, create: AlbumCreateInput!, update: AlbumUpdateInput!): Album!
+  deleteAlbum(where: AlbumWhereUniqueInput!): Album
+  deleteManyAlbums(where: AlbumWhereInput): BatchPayload!
+  createImage(data: ImageCreateInput!): Image!
+  updateImage(data: ImageUpdateInput!, where: ImageWhereUniqueInput!): Image
+  updateManyImages(data: ImageUpdateManyMutationInput!, where: ImageWhereInput): BatchPayload!
+  upsertImage(where: ImageWhereUniqueInput!, create: ImageCreateInput!, update: ImageUpdateInput!): Image!
+  deleteImage(where: ImageWhereUniqueInput!): Image
+  deleteManyImages(where: ImageWhereInput): BatchPayload!
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
@@ -40,6 +552,12 @@ type PageInfo {
 }
 
 type Query {
+  album(where: AlbumWhereUniqueInput!): Album
+  albums(where: AlbumWhereInput, orderBy: AlbumOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Album]!
+  albumsConnection(where: AlbumWhereInput, orderBy: AlbumOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AlbumConnection!
+  image(where: ImageWhereUniqueInput!): Image
+  images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image]!
+  imagesConnection(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ImageConnection!
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
@@ -47,12 +565,17 @@ type Query {
 }
 
 type Subscription {
+  album(where: AlbumSubscriptionWhereInput): AlbumSubscriptionPayload
+  image(where: ImageSubscriptionWhereInput): ImageSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 
 type User {
   id: ID!
   name: String!
+  email: String!
+  password: String!
+  albums(where: AlbumWhereInput, orderBy: AlbumOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Album!]
 }
 
 type UserConnection {
@@ -64,6 +587,21 @@ type UserConnection {
 input UserCreateInput {
   id: ID
   name: String!
+  email: String!
+  password: String!
+  albums: AlbumCreateManyWithoutOwnerInput
+}
+
+input UserCreateOneWithoutAlbumsInput {
+  create: UserCreateWithoutAlbumsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutAlbumsInput {
+  id: ID
+  name: String!
+  email: String!
+  password: String!
 }
 
 type UserEdge {
@@ -76,11 +614,17 @@ enum UserOrderByInput {
   id_DESC
   name_ASC
   name_DESC
+  email_ASC
+  email_DESC
+  password_ASC
+  password_DESC
 }
 
 type UserPreviousValues {
   id: ID!
   name: String!
+  email: String!
+  password: String!
 }
 
 type UserSubscriptionPayload {
@@ -101,10 +645,33 @@ input UserSubscriptionWhereInput {
 
 input UserUpdateInput {
   name: String
+  email: String
+  password: String
+  albums: AlbumUpdateManyWithoutOwnerInput
 }
 
 input UserUpdateManyMutationInput {
   name: String
+  email: String
+  password: String
+}
+
+input UserUpdateOneRequiredWithoutAlbumsInput {
+  create: UserCreateWithoutAlbumsInput
+  update: UserUpdateWithoutAlbumsDataInput
+  upsert: UserUpsertWithoutAlbumsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateWithoutAlbumsDataInput {
+  name: String
+  email: String
+  password: String
+}
+
+input UserUpsertWithoutAlbumsInput {
+  update: UserUpdateWithoutAlbumsDataInput!
+  create: UserCreateWithoutAlbumsInput!
 }
 
 input UserWhereInput {
@@ -136,11 +703,41 @@ input UserWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
+  albums_some: AlbumWhereInput
   AND: [UserWhereInput!]
 }
 
 input UserWhereUniqueInput {
   id: ID
+  email: String
 }
 `
       }

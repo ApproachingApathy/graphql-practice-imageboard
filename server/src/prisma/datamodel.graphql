@@ -1,0 +1,25 @@
+type User {
+	id: ID! @id
+	name: String!
+	email: String! @unique
+	password: String!
+	albums: [Album!]! @relation(link: INLINE)
+}
+
+type Album {
+	id: ID! @id
+	title: String!
+	meta: Json!
+	owner: User!
+	images: [Image!]! @relation(link: INLINE)
+}
+
+type Image {
+	id: ID! @id
+	title: String!
+	album: Album!
+	meta: Json!
+	filePath: String!
+	createdAt: DateTime @createdAt
+	updatedAt: DateTime @updatedAt
+}

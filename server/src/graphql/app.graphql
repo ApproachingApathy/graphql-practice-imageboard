@@ -1,3 +1,5 @@
+# import Xana from 'app/test.graphql'
+
 type Testing {
-    test: String!
+	test: String!
 }
