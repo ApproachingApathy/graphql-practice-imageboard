@@ -21,6 +21,8 @@ type Album {
   meta: Json!
   owner: User!
   images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image!]
+  createdAt: DateTime
+  updatedAt: DateTime
 }
 
 type AlbumConnection {
@@ -73,12 +75,18 @@ enum AlbumOrderByInput {
   title_DESC
   meta_ASC
   meta_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
 }
 
 type AlbumPreviousValues {
   id: ID!
   title: String!
   meta: Json!
+  createdAt: DateTime
+  updatedAt: DateTime
 }
 
 input AlbumScalarWhereInput {
@@ -110,6 +118,22 @@ input AlbumScalarWhereInput {
   title_not_starts_with: String
   title_ends_with: String
   title_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [AlbumScalarWhereInput!]
   OR: [AlbumScalarWhereInput!]
   NOT: [AlbumScalarWhereInput!]
@@ -231,6 +255,22 @@ input AlbumWhereInput {
   title_not_ends_with: String
   owner: UserWhereInput
   images_some: ImageWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [AlbumWhereInput!]
 }
 
@@ -576,6 +616,8 @@ type User {
   email: String!
   password: String!
   albums(where: AlbumWhereInput, orderBy: AlbumOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Album!]
+  createdAt: DateTime
+  updatedAt: DateTime
 }
 
 type UserConnection {
@@ -618,6 +660,10 @@ enum UserOrderByInput {
   email_DESC
   password_ASC
   password_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
 }
 
 type UserPreviousValues {
@@ -625,6 +671,8 @@ type UserPreviousValues {
   name: String!
   email: String!
   password: String!
+  createdAt: DateTime
+  updatedAt: DateTime
 }
 
 type UserSubscriptionPayload {
@@ -732,6 +780,22 @@ input UserWhereInput {
   password_ends_with: String
   password_not_ends_with: String
   albums_some: AlbumWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [UserWhereInput!]
 }
 

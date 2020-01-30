@@ -1,11 +1,15 @@
 const { ApolloServer } = require("apollo-server");
 const { importSchema } = require("graphql-import");
 
+const { prisma } = require("./prisma/generated/prisma-client/index");
+
+const resolvers = require("./resolvers/resolver");
+
 function buildSchema() {
 	return new Promise((resolve, reject) => {
 		// Define each async import schema call.
 		const schemas = {
-			db: importSchema("src/graphql/db.graphql"),
+			// db: importSchema("src/graphql/db.graphql"),
 			app: importSchema("src/graphql/app.graphql")
 		};
 
@@ -27,7 +31,12 @@ function buildSchema() {
 
 buildSchema().then(typeDefs => {
 	// console.log(typeDefs)
-	const server = new ApolloServer({ typeDefs });
+	const server = new ApolloServer({
+		typeDefs,
+		resolvers,
+		tracing: true
+		// dataSources: () => prisma
+	});
 	server.listen({ port: 4000 }).then(({ url }) => {
 		console.log(`Server started at ${url}`);
 	});

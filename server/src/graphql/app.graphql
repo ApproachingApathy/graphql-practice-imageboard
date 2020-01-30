@@ -1,5 +1,10 @@
-# import Xana from 'app/test.graphql'
+# import User, Image, Album, Query, Mutation from "db.graphql"
+type File {
+	filename: String!
+	mimetype: String!
+	encoding: String!
+}
 
-type Testing {
-	test: String!
+type Mutation {
+	singleUpload(file: Upload!): File!
 }
